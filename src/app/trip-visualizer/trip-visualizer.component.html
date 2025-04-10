@@ -1,0 +1,83 @@
+<div class="trip-container">
+    <div class="trip-inputs">
+        <input type="text" [(ngModel)]="startPoint" placeholder="Start Point" class="trip-input" />
+        <input type="text" [(ngModel)]="endPoint" placeholder="End Point" class="trip-input" />
+        <button (click)="addTrip()" [disabled]="!startPoint || !endPoint" class="add-button">Add Trip</button>
+    
+      </div>
+      
+      <div class="trip-visualization">
+        <div class="timeline-scroll-wrapper">
+        <svg class="timeline-svg" [attr.width]="trips.length * 150 + 100" height="200">
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="orange" />
+            </marker>
+          </defs>
+      
+          <ng-container *ngFor="let trip of trips; let i = index">
+            <ng-container *ngIf="i > 0">
+              <ng-container [ngSwitch]="getTripType(i)">
+      
+                <!-- Continued Trip (Level 1) -->
+               
+                      <ng-container *ngSwitchCase="'continued'">
+                        <line *ngIf="!isEndOfRepeated(i - 1)"
+                              [attr.x1]="(i - 1) * 150 + 20"
+                              [attr.y1]="getY(i - 1)"
+                              [attr.x2]="i * 150"
+                              [attr.y2]="getY(i)"
+                              stroke="blue" stroke-width="2" />
+                      </ng-container>
+                      
+      
+                <!-- Non-continued Trip (Level 1) -->
+                <ng-container *ngSwitchCase="'non-continued'">
+                    <line *ngIf="!isEndOfRepeated(i - 1)"
+                          [attr.x1]="(i - 1) * 150 + 20" y1="60"
+                          [attr.x2]="i * 150" y2="60"
+                          stroke="orange" stroke-width="2" marker-end="url(#arrow)" />
+                  </ng-container>
+                  
+      
+                <!-- Repeated Trip (Level 2 arc) -->
+                <path *ngSwitchCase="'repeated'"
+                      [attr.d]="'M' + ((i - 1) * 150 + 20) + ',' + getY(i - 1) + ' Q' + ((i * 150 - 40)) + ',20 ' + (i * 150) + ',' + getY(i)"
+                      stroke="gray" fill="transparent" stroke-width="2" />
+      
+              </ng-container>
+      
+              <!-- Arc to go up to Level 2 -->
+              <path *ngIf="isStartOfRepeated(i)"
+                    [attr.d]="'M' + ((i - 1) * 150 + 20) + ',' + getY(i - 1) + ' Q' + ((i * 150 - 40)) + ',20 ' + (i * 150) + ',' + getY(i)"
+                    stroke="gray" fill="transparent" stroke-width="2" /> 
+                    <!-- Arc to go up to Level 2
+    
+    
+    
+      
+              <!-- Arc to come down from Level 2 -->
+              <path *ngIf="isEndOfRepeated(i)"
+                    [attr.d]="'M' + ((i) * 150 + 20) + ',' + getY(i) + ' Q' + ((i * 150 + 80)) + ',20 ' + ((i + 1) * 150) + ',' + getY(i + 1)"
+                    stroke="gray" fill="transparent" stroke-width="2" />
+      
+            </ng-container>
+      
+            <!-- Trip Dot -->
+            <circle [attr.cx]="i * 150 + 20"
+                    [attr.cy]="getY(i)"
+                    r="5"
+                    [attr.fill]="getTripColor(i)" />
+      
+            <!-- Trip Label -->
+            <text [attr.x]="i * 150 + 10"
+                  [attr.y]="getY(i) + 30"
+                  font-size="12">
+              {{ trip.from.slice(0,3).toUpperCase() }} - {{ trip.to.slice(0,3).toUpperCase() }}
+            </text>
+          </ng-container>
+        </svg>
+    </div>
+      </div>
+    </div>
+      

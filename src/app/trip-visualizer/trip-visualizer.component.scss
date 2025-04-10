@@ -1,0 +1,166 @@
+
+  svg {
+    background-color: white;
+    border: 1px solid #ccc;
+  }
+
+  .trip-inputs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    align-items: center;
+  }
+  
+  .trip-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: #4E9AF1;
+      box-shadow: 0 0 0 3px rgba(78, 154, 241, 0.2);
+    }
+  }
+  
+  .add-button {
+    padding: 12px 24px;
+    background: #4E9AF1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      background: #3a89e8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+    &:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+        
+        &:hover {
+          background: #cccccc;
+          transform: none;
+          box-shadow: none;
+        }
+      }
+  }
+  
+//   .trip-visualization {
+//     background: white;
+//     border-radius: 8px;
+//     padding: 20px;
+//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+//     overflow-x: auto;
+//   }
+  
+//   .timeline-svg {
+//     background: white;
+//     border-radius: 6px;
+//     min-width: 600px;
+//   }
+  
+  .trip-dot {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+    
+    &:hover {
+      r: 10;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+    }
+  }
+  
+  .trip-label {
+    fill: #495057;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+
+  
+  .trip-visualization {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow-x: auto; /* enable scrolling */
+  }
+  
+  .timeline-scroll-wrapper {
+    overflow-x: auto;  /* enable horizontal scrolling */
+    width: 100%;
+  }
+  
+  .timeline-svg {
+    background: white;
+    border-radius: 6px;
+    min-width: 1362px;
+display: block;
+  }
+  
+  .trip-list {
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  
+    h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #333;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  
+      li {
+        padding: 6px 0;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 14px;
+  
+        &:last-child {
+          border-bottom: none;
+        }
+  
+        strong {
+          color: #4E9AF1;
+        }
+      }
+    }
+  }
+  
+
+  .show-list-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .show-list-button:hover {
+    background-color: #0056b3;
+  }
+  
